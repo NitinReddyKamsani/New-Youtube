@@ -1,0 +1,2 @@
+export const Hamburger_icon = "https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/What%20is%20a%20Hamburger%20Button.png?width=225&name=What%20is%20a%20Hamburger%20Button.png"
+export const Youtube_logo = "https://1000logos.net/wp-content/uploads/2017/05/Youtube-Logo-2017.png"
