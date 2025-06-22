@@ -1,7 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Sidebar = () => {
-  return (
+
+  const isMenuOpen  = useSelector((store) => store.app.isMenuOpen);
+
+    return (
+    isMenuOpen && 
     <div className='col-span-1 p-5 shadow-lg w-48'>
       <h1 className='font-bold text-xl'>Subscriptions</h1>
       <ul>

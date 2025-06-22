@@ -1,14 +1,18 @@
-import React from 'react'
-import Head from './components/Head'
-import Body from './components/Body'
-
+import React, { useEffect } from 'react';
+import Head from './components/Head';
+import Body from './components/Body';
+import { Provider } from 'react-redux';
+import store from './utils/store';
 const App = () => {
+  
   return (
-    <div>
+    <Provider store={store}>
+      <div>
         <Head />
         <Body />
-    </div>
-  )
-}
+      </div>
+    </Provider>
+  );
+};
 
-export default App
+export default App;
