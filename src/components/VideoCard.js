@@ -2,8 +2,6 @@ import React from 'react'
 
 const VideoCard = ({ info }) => {
 
-    console.log(info)
-
     if (!info) return null
 
     const {snippet,statistics} = info;
@@ -12,7 +10,7 @@ const VideoCard = ({ info }) => {
   
   return (
 
-    <div className='p-2 m-2 w-72 shadow-lg rounded-lg'>
+    <div className='p-2 m-2 w-72 h-72 shadow-lg rounded-lg'>
         <img className="rounded-lg" alt="thumbnails" src={thumbnails.medium.url} />
         <ul>
     <li className='font-bold py-2 text-sm truncate'>{channelTitle}</li>
