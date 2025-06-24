@@ -4,3 +4,5 @@ export const User_icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9Gc
 
 const apiKey = process.env.PARCEL_GOOGLE_API
 export const Youtube_Api =`https://youtube.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${apiKey}`
+
+export const Auto_suggest = "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q="
