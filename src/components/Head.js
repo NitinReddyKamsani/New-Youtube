@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Auto_suggest, Hamburger_icon, User_icon, Youtube_logo } from '../utils/constants'
 import { toggleMenu } from '../utils/appSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { cacheResults } from '../utils/searchSlice'
 
 
 
@@ -10,32 +11,40 @@ const Head = () => {
 
   const dispatch = useDispatch();
 
-  const [searchQuery,setSearchQuery] = useState("");
+  const cacheSearch = useSelector((store) => store.search)
 
+  const [searchQuery,setSearchQuery] = useState("");
+  const [suggestions,setSuggestions] = useState([]);
+  const [showSuggestions,setShowSuggestions] = useState(false);
+
+  
 
   async function getSuggestions (){
 
     const data = await fetch(Auto_suggest + searchQuery);
     const json = await data.json();
-    console.log(json[1]);
-    
+    setSuggestions(json[1])
+
+    dispatch(cacheResults({
+      [searchQuery] : json[1]
+    }))
   }
 
   useEffect(()=>{
 
     const timer = setTimeout(()=>{
-      getSuggestions();
+      if(cacheSearch[searchQuery]){
+        setSuggestions(cacheSearch[searchQuery])
+      }else{
+        getSuggestions();
+      }
     },200)
 
     return () => {
       clearTimeout(timer);
 
     }
-  }
-
-  ,[searchQuery])
-
-
+  },[searchQuery])
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
@@ -58,16 +67,21 @@ const Head = () => {
           placeholder='Search'
           className='w-1/2 rounded-l-full p-2 border border-gray-400'
           onChange={(e) => setSearchQuery(e.target.value)}
+          onFocus={() => setShowSuggestions(true)}
+          onBlur={() => setShowSuggestions(false)}
         />
         <button className='border border-gray-400 rounded-r-full p-2'>Search</button>
       </div>
   
       {/* Suggestions */}
+      { showSuggestions && 
       <ul className='absolute top-full mt-1 w-[30rem] mr-9 bg-white border border-gray-300 rounded-md shadow-md z-10'>
-        <li className='p-2 hover:bg-gray-100 cursor-pointer'>Shorts</li>
-        <li className='p-2 hover:bg-gray-100 cursor-pointer'>Home</li>
-        <li className='p-2 hover:bg-gray-100 cursor-pointer'>Subscriptions</li>
+        {
+          suggestions.map((suggestion) => (
+            <li key={suggestion} className='p-2 cursor-pointer hover:bg-gray' > {suggestion} </li>
+        ))}
       </ul>
+      }
     </div>
   
     {/* Right Avatar */}
