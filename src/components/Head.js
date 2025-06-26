@@ -4,18 +4,27 @@ import { toggleMenu } from '../utils/appSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { cacheResults } from '../utils/searchSlice'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const Head = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cacheSearch = useSelector((store) => store.search)
 
   const [searchQuery,setSearchQuery] = useState("");
   const [suggestions,setSuggestions] = useState([]);
   const [showSuggestions,setShowSuggestions] = useState(false);
+
+
+  function handleSuggestions(suggestion){
+    setSearchQuery(suggestion);
+    setShowSuggestions(false);
+    navigate(`/results?search_query=${encodeURIComponent(suggestion)}`);
+  }
 
   
 
@@ -78,7 +87,7 @@ const Head = () => {
       <ul className='absolute top-full mt-1 w-[30rem] mr-9 bg-white border border-gray-300 rounded-md shadow-md z-10'>
         {
           suggestions.map((suggestion) => (
-            <li key={suggestion} className='p-2 cursor-pointer hover:bg-gray' > {suggestion} </li>
+            <li key={suggestion} className='p-2 cursor-pointer hover:bg-gray-200'  onMouseDown={()=>handleSuggestions(suggestion)}> {suggestion} </li>
         ))}
       </ul>
       }
