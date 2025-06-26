@@ -25,9 +25,9 @@ const Results = () => {
     <div className='p-5'>
       <h2 className='text-xl font-bold mb-4'>Search Results for "{query}"</h2>
       <div className='grid gap-4'>
-        {videos.map(video => (
+        {videos.map((video,index)=> (
           <div 
-            key={video.id.videoId} 
+            key={index} 
             className='cursor-pointer flex items-center gap-4 border p-2 rounded hover:bg-gray-100'
             onClick={() => handleVideoClick(video.id.videoId)}
           >

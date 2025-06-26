@@ -86,8 +86,8 @@ const Head = () => {
       { showSuggestions && 
       <ul className='absolute top-full mt-1 w-[30rem] mr-9 bg-white border border-gray-300 rounded-md shadow-md z-10'>
         {
-          suggestions.map((suggestion) => (
-            <li key={suggestion} className='p-2 cursor-pointer hover:bg-gray-200'  onMouseDown={()=>handleSuggestions(suggestion)}> {suggestion} </li>
+          suggestions.map((suggestion,index) => (
+            <li key={index} className='p-2 cursor-pointer hover:bg-gray-200'  onMouseDown={()=>handleSuggestions(suggestion)}> {suggestion} </li>
         ))}
       </ul>
       }
