@@ -1,5 +1,4 @@
 node_modules
 dist
 .parcel-cache
-src/components/utils/constants.js
 .env
