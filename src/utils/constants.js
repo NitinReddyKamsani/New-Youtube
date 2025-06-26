@@ -9,3 +9,5 @@ export const Youtube_Api =`https://youtube.googleapis.com/youtube/v3/videos?part
 
 export const Auto_suggest = "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q="
 
+export const OFFSET_LIVE_CHAT = 30;
+
